@@ -104,9 +104,11 @@ export default {
     },
     done(element) {
       element.done = !element.done;
+      localStorage.setItem("store", window.btoa(JSON.stringify(this.lists)));
     },
     remove(element) {
       this.lists = this.lists.filter((e) => e.id !== element.id);
+      localStorage.setItem("store", window.btoa(JSON.stringify(this.lists)));
     },
     time(isa) {
       return moment(isa).fromNow();
