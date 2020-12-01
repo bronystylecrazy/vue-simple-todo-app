@@ -99,6 +99,7 @@ export default {
         isa: Date.now(),
         fromNow: "a few seconds ago",
       });
+      localStorage.setItem("store", window.btoa(JSON.stringify(this.lists)));
       this.title = "";
     },
     done(element) {
@@ -120,6 +121,9 @@ export default {
     },
   },
   mounted() {
+    if (localStorage.getItem("store")) {
+      this.lists = JSON.parse(window.atob(localStorage.getItem("store")));
+    }
     setInterval(() => {
       for (var i = 0; i < this.lists.length; i++) {
         this.lists[i].fromNow = moment(this.lists[i].isa).fromNow();
